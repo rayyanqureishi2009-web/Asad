@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Phoppa!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fce4ec;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Step 1: Start Button */
+        #start-screen button {
+            padding: 20px 40px;
+            font-size: 24px;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        #start-screen button:hover { transform: scale(1.1); }
+
+        /* Step 2: Cake Section */
+        #cake-screen { cursor: pointer; position: relative; }
+        .cake { font-size: 100px; position: relative; }
+        .name-on-cake {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        /* Step 3: Balloons */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 50px;
+            height: 70px;
+            background-color: #ff4081;
+            border-radius: 50%;
+            animation: float Up 4s linear forwards;
+        }
+
+        @keyframes floatUp {
+            to { bottom: 110vh; transform: translateX(50px); }
+        }
+
+        /* Step 4: Envelope & Message */
+        #envelope-screen { width: 90%; max-width: 500px; }
+        .envelope {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid #ff4081;
+            position: relative;
+            animation: slideIn 1s ease-out;
+        }
+        @keyframes slideIn { from { transform: translateY(100px); opacity: 0; } }
+
+        .message-title { color: #ff4081; font-size: 24px; margin-bottom: 15px; }
+        .message-body { font-size: 16px; line-height: 1.6; color: #444; text-align: justify; }
+        .signature { margin-top: 20px; font-weight: bold; font-size: 14px; color: #888; }
+    </style>
+</head>
+<body>
+
+    <div id="start-screen">
+        <button onclick="showCake()">🎁 OPEN GIFT</button>
+    </div>
+
+    <div id="cake-screen" class="hidden" onclick="triggerBalloons()">
+        <div class="cake">
+            🎂
+            <div class="name-on-cake">Asad</div>
+        </div>
+        <p>Slide (Click) to celebrate!</p>
+    </div>
+
+    <div id="envelope-screen" class="hidden">
+        <div class="envelope">
+            <div class="message-title">Happy Birthday, Phoppa Asad!</div>
+            <div class="message-body">
+                On your special day, I wanted to send a message that reflects how much you mean to us. 
+                Your warmth, guidance, and endless humor brighten our lives tremendously. 
+                You bring such a unique joy to our family, and your presence is a gift in itself. 
+                May this year bring you as much happiness as you give to those around you. 
+                Wishing you health, success, and a very "level" year ahead!
+            </div>
+            <div class="signature">created by rayyan qureishi</div>
+        </div>
+    </div>
+
+    <script>
+        function showCake() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('cake-screen').classList.remove('hidden');
+        }
+
+        function triggerBalloons() {
+            // Create balloons
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'balloon';
+                    balloon.style.left = Math.random() * 100 + 'vw';
+                    balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+                    document.body.appendChild(balloon);
+                }, i * 200);
+            }
+
+            // After balloons float, show envelope
+            setTimeout(() => {
+                document.getElementById('cake-screen').classList.add('hidden');
+                document.getElementById('envelope-screen').classList.remove('hidden');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
